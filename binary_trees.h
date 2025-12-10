@@ -23,7 +23,7 @@ struct binary_tree_s
 typedef struct binary_tree_s binary_tree_t;
 
 /* Prototype de la fonction */
-void binary_tree_delete(binary_tree_t *tree);
+int binary_tree_is_leaf(const binary_tree_t *node);
 
 /* Fonctions utilitaires pour les tests */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
