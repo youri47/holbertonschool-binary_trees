@@ -1,52 +1,60 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_insert_left - Insère un nœud comme l'enfant gauche d'un autre nœud.
+ * binary_tree_insert_left - Insère un nœud comme enfant gauche d'un autre
+ * @parent: Pointeur vers le nœud parent où insérer l'enfant gauche
+ * @value: Valeur à stocker dans le nouveau nœud
  *
- * @parent: Un pointeur vers le nœud parent où insérer l'enfant gauche.
- * @value: La valeur à stocker dans le nouveau nœud.
+ * Description: Cette fonction crée un nouveau nœud et l'insère comme
+ * enfant gauche du parent. Si le parent a déjà un enfant gauche:
+ * 1. Le nouveau nœud prend la place de l'ancien enfant gauche
+ * 2. L'ancien enfant gauche devient l'enfant gauche du nouveau nœud
  *
- * Return: Un pointeur vers le nœud créé, ou NULL en cas d'échec
- * ou si le parent est NULL.
+ * Exemple:
+ * Avant:         Après insertion de 54:
+ *   98              98
+ *  /               /
+ * 12              54
+ *                /
+ *               12
+ *
+ * Return: Pointeur vers le nouveau nœud créé, ou NULL en cas d'échec
+ *         ou si parent est NULL
  */
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 {
 	binary_tree_t *new_node;
 	binary_tree_t *old_left;
 
-	/* 1. Vérification de la précondition */
+	/* Si le parent est NULL, on ne peut pas insérer */
 	if (parent == NULL)
 		return (NULL);
 
-	/* 2. Création du nouveau nœud */
-	/* Le nouveau nœud est initialement créé avec 'parent' comme parent */
-	new_node = binary_tree_node(parent, value);
-
+	/* Créer le nouveau nœud */
+	new_node = malloc(sizeof(binary_tree_t));
 	if (new_node == NULL)
 		return (NULL);
 
-	/* 3. Gestion de l'enfant existant */
-	if (parent->left != NULL)
+	/* Initialiser le nouveau nœud */
+	new_node->n = value;
+	new_node->parent = parent;
+	new_node->left = NULL;
+	new_node->right = NULL;
+
+	/* Sauvegarder l'ancien enfant gauche du parent */
+	old_left = parent->left;
+
+	/* Le nouveau nœud devient l'enfant gauche du parent */
+	parent->left = new_node;
+
+	/* Si le parent avait déjà un enfant gauche */
+	if (old_left != NULL)
 	{
-		/* Sauvegarder l'ancien enfant gauche */
-		old_left = parent->left;
-
-		/* Le nouveau nœud prend la place de l'enfant gauche du parent */
-		/* new_node->left est déjà NULL, nous n'avons pas besoin de l'écraser */
-
 		/* L'ancien enfant gauche devient l'enfant gauche du nouveau nœud */
 		new_node->left = old_left;
-
-		/* L'ancien enfant doit maintenant pointer vers le nouveau nœud comme son parent */
+		/* Mettre à jour le parent de l'ancien enfant gauche */
 		old_left->parent = new_node;
 	}
-	/*
-	 * Si parent->left était NULL, le nouveau nœud est déjà correctement
-	 * initialisé (new_node->left = NULL) et rien d'autre n'est nécessaire ici.
-	 */
-
-	/* 4. Liaison du nouveau nœud au parent */
-	parent->left = new_node;
 
 	return (new_node);
 }
