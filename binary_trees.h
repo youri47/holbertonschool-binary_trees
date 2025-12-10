@@ -5,14 +5,7 @@
 #include <stdlib.h> /* Pour malloc et free */
 #include <stdio.h>  /* Pour printf */
 
-/**
- * struct binary_tree_s - Nœud d'arbre binaire
- *
- * @n: La valeur entière stockée dans le nœud
- * @parent: Pointeur vers le nœud parent
- * @left: Pointeur vers l'enfant gauche
- * @right: Pointeur vers l'enfant droit
- */
+/* ... (Définition de la structure binary_tree_s) ... */
 struct binary_tree_s
 {
 	int n;
@@ -29,6 +22,9 @@ typedef struct binary_tree_s binary_tree_t;
 
 /* 0-binary_tree_node.c */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
+
+/* 1-binary_tree_insert_left.c */
+binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value); /* <-- C'est la ligne manquante ! */
 
 /* binary_tree_print.c (Prototype de la fonction d'affichage) */
 void binary_tree_print(const binary_tree_t *);
