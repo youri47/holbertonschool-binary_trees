@@ -1,13 +1,16 @@
-#ifndef _BINARY_TREES_H_
-#define _BINARY_TREES_H_
+#ifndef BINARY_TREES_H
+#define BINARY_TREES_H
 
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 /**
- * struct binary_tree_s - Nœud d'arbre binaire
- * ...
+ * struct binary_tree_s - Structure d'un nœud d'arbre binaire
+ * @n: Valeur entière stockée dans le nœud
+ * @parent: Pointeur vers le nœud parent
+ * @left: Pointeur vers l'enfant gauche
+ * @right: Pointeur vers l'enfant droit
  */
 struct binary_tree_s
 {
@@ -19,17 +22,10 @@ struct binary_tree_s
 
 typedef struct binary_tree_s binary_tree_t;
 
-/* Prototypes de fonctions */
-/* 0-binary_tree_node.c */
+/* Prototype de la fonction */
+void binary_tree_delete(binary_tree_t *tree);
+
+/* Fonctions utilitaires pour les tests */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 
-/* 1-binary_tree_insert_left.c */
-binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
-
-/* 2-binary_tree_insert_right.c <--- NOUVEAU PROTOTYPE REQUIS */
-binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
-
-/* Utilitaires */
-void binary_tree_print(const binary_tree_t *);
-
-#endif /* _BINARY_TREES_H_ */
+#endif /* BINARY_TREES_H */
